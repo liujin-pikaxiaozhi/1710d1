@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间的值为dao层接口的权限定名 -->
+<mapper namespace="com.liujin.movie.dao.MovieDao">
+	<!-- 查询列表 -->
+	<select id="selects" resultType="Movie">
+		select * from movie
+		<where>
+			<if test="null!=name and name!=''">and name like '%${name}%'</if>
+			<if test="null!=year and year!=-1">and year=${year}</if>
+			<if test="null!=datea1 and datea1!=''">and datea&gt;='${datea1}'</if>
+			<if test="null!=datea2 and datea2!=''">and datea&lt;='${datea2}'</if>
+			<if test="null!=longTime1 and longTime1!=''">and longTime&gt;=${longTime1}</if>
+			<if test="null!=longTime2 and longTime2!=''">and longTime&lt;=${longTime2}</if>
+			<if test="null!=price1 and price1!=''">and price&gt;=${price1}</if>
+			<if test="null!=price2 and price2!=''">and price&lt;=${price2}</if>
+		</where>
+		<if test="null!=orderColumn and orderColumn!=''"> order by ${orderColumn} ${orderMether}</if>
+	</select>
+</mapper>
